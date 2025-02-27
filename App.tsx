@@ -1,61 +1,64 @@
-import React, { useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { Text, TextInput, TouchableOpacity, View, Alert } from 'react-native';
-import DashBoard from './src/Pages/dashBoard';  // Import the DashBoard component
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import Dashboard from './src/Pages/DashBoard';
+import TimerScreen from './src/Pages/TimeScreen';
+import Calculation from './src/Pages/CalculationScreen';
+
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
+function TabNavigator() {
+  return (
+    <Tab.Navigator
+    screenOptions={({ route }) => ({
+      tabBarHideOnKeyboard: true, 
+      tabBarIcon: ({ color, size }) => {
+        let iconName;
+        switch (route.name) {
+          case 'Home':
+            iconName = 'dumbbell';
+            return(<FontAwesome6 name={iconName} size={size} color={color} />)
+          case 'Timer':
+            iconName = 'timer';
+            return(<Ionicons name={iconName} size={size} color={color} />)
+          case 'Calculation':
+            iconName = 'calculator';
+            return(<AntDesign name={iconName} size={size} color={color}/>)
+          default:
+            iconName = 'question';
+        }
+      },  
+      tabBarShowLabel: false,
+      headerShown: false,
+      tabBarStyle: {
+        backgroundColor: '#121212',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        paddingVertical: 5
+      },
+      tabBarActiveTintColor: '#FF8B00',
+      tabBarInactiveTintColor: 'gray',
+      
+    })}
+    >
+      <Tab.Screen name="Home" component={Dashboard} />
+      <Tab.Screen name="Timer" component={TimerScreen} />
+      <Tab.Screen name="Calculation" component={Calculation} />
+    </Tab.Navigator>
+  );
+}
 
 export default function App() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);  // State to track login status
-
-  const handleLogin = () => {
-    if (username && password) {
-      setIsLoggedIn(true);  // Set login status to true if both username and password are entered
-      Alert.alert('Login Successful', `Welcome ${username}!`);
-    } else {
-      Alert.alert('Error', 'Please enter both username and password');
-    }
-  };
-
   return (
-    <View className="flex-1 justify-center items-center bg-blue-500 px-6 py-4">
-      {isLoggedIn ? (
-        // If logged in, show the dashboard
-        <DashBoard />
-      ) : (
-        // Otherwise, show the login form
-        <>
-          <Text className="text-3xl font-semibold text-green-800 mb-6">Fitness App</Text>
-          
-          <View className="w-full mb-4">
-            <TextInput
-              value={username}
-              onChangeText={setUsername}
-              placeholder="Username"
-              className="bg-white p-3 rounded-lg shadow-md text-gray-700"
-            />
-          </View>
-
-          <View className="w-full mb-6">
-            <TextInput
-              value={password}
-              onChangeText={setPassword}
-              placeholder="Password"
-              secureTextEntry
-              className="bg-white p-3 rounded-lg shadow-md text-gray-700"
-            />
-          </View>
-
-          <TouchableOpacity
-            onPress={handleLogin}
-            className="bg-blue-500 w-full py-3 rounded-lg shadow-md mb-4"
-          >
-            <Text className="text-white text-center text-lg font-semibold">Login</Text>
-          </TouchableOpacity>
-        </>
-      )}
-
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="TabNav" component={TabNavigator} options={{ headerShown: false }} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
