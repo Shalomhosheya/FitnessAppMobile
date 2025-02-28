@@ -1,22 +1,23 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const DailyWorkout = () => {
+const bulk = () => {
   return (
     <View>
-      <Text style={
+      <Text
+      style={
         {
             fontFamily: 'sans-serif',
             fontSize: 30,
-            color: '#33FFFF',
+            color: 'rgba(255,215,0,1)',
             textAlign: 'center',
             marginBottom: 0,
             fontWeight: 'bold'
         }
-        
-      }>Cardio</Text>
+      }
+      >Bulk</Text>
     </View>
   )
 }
 
-export default DailyWorkout
+export default bulk

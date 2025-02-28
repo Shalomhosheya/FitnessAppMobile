@@ -2,6 +2,8 @@ import React from 'react';
 import { SafeAreaView, View, ImageBackground } from 'react-native';
 import Welcome from '../Components/Welcome';
 import DailyWorkout from '../Components/DailyWorkout';
+import Bulk from '../Components/Bulk';
+import Anerobic from '../Components/Anerobic';
 
 // Import images
 const image1 = require('../../assets/images/pushup.jpeg');
@@ -41,7 +43,7 @@ const Dashboard = () => {
           }}
           imageStyle={{ borderRadius: 10 }}
         >
-          <DailyWorkout />
+          <Bulk />
         </ImageBackground>
 
         <ImageBackground 
@@ -54,7 +56,7 @@ const Dashboard = () => {
           }}
           imageStyle={{ borderRadius: 10 }}
         >
-          <DailyWorkout />
+          <Anerobic />
         </ImageBackground>
 
       </View>

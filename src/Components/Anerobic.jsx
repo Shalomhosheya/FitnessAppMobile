@@ -1,22 +1,23 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const DailyWorkout = () => {
+const Anerobic = () => {
   return (
     <View>
-      <Text style={
+      <Text
+      style={
         {
             fontFamily: 'sans-serif',
             fontSize: 30,
-            color: '#33FFFF',
+            color: 'rgb(124,252,0)',
             textAlign: 'center',
             marginBottom: 0,
             fontWeight: 'bold'
         }
-        
-      }>Cardio</Text>
+      }
+    >Anerobic</Text>
     </View>
   )
 }
 
-export default DailyWorkout
+export default Anerobic
